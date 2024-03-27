@@ -103,9 +103,11 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "RedisBackup")
 		os.Exit(1)
 	}
-	if err = (&redisv1alpha1.RedisCluster{}).SetupWebhookWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create webhook", "webhook", "RedisCluster")
-		os.Exit(1)
+	if os.Getenv("ENABLE_WEBHOOK") == "true" {
+		if err = (&redisv1alpha1.RedisCluster{}).SetupWebhookWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create webhook", "webhook", "RedisCluster")
+			os.Exit(1)
+		}
 	}
 	//+kubebuilder:scaffold:builder
 

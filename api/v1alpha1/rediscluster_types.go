@@ -28,8 +28,13 @@ type RedisClusterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of RedisCluster. Edit rediscluster_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// MasterSize define the redis master size
+	// +optional
+	MasterSize int32 `json:"masterSize,omitempty"`
+
+	// Image define the redis image
+	// +optional
+	Image string `json:"image,omitempty"`
 }
 
 // RedisClusterStatus defines the observed state of RedisCluster
