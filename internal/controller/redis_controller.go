@@ -27,26 +27,26 @@ import (
 	redisv1alpha1 "github.com/Fish-pro/redis-operator/api/v1alpha1"
 )
 
-// RedisClusterReconciler reconciles a RedisCluster object
-type RedisClusterReconciler struct {
+// RedisReconciler reconciles a Redis object
+type RedisReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=redis.run,resources=redisclusters,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=redis.run,resources=redisclusters/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=redis.run,resources=redisclusters/finalizers,verbs=update
+//+kubebuilder:rbac:groups=redis.run,resources=redis,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=redis.run,resources=redis/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=redis.run,resources=redis/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the RedisCluster object against the actual cluster state, and then
+// the Redis object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.15.0/pkg/reconcile
-func (r *RedisClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+func (r *RedisReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
 	// TODO(user): your logic here
@@ -55,8 +55,8 @@ func (r *RedisClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *RedisClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *RedisReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&redisv1alpha1.RedisCluster{}).
+		For(&redisv1alpha1.Redis{}).
 		Complete(r)
 }

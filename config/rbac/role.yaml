@@ -7,7 +7,7 @@ rules:
 - apiGroups:
   - redis.run
   resources:
-  - redisbackups
+  - distributedredisclusters
   verbs:
   - create
   - delete
@@ -19,13 +19,65 @@ rules:
 - apiGroups:
   - redis.run
   resources:
-  - redisbackups/finalizers
+  - distributedredisclusters/finalizers
   verbs:
   - update
 - apiGroups:
   - redis.run
   resources:
-  - redisbackups/status
+  - distributedredisclusters/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - redis.run
+  resources:
+  - redis
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - redis.run
+  resources:
+  - redis/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - redis.run
+  resources:
+  - redis/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - redis.run
+  resources:
+  - redisclusterbackups
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - redis.run
+  resources:
+  - redisclusterbackups/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - redis.run
+  resources:
+  - redisclusterbackups/status
   verbs:
   - get
   - patch

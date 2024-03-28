@@ -96,18 +96,38 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "RedisCluster")
 		os.Exit(1)
 	}
-	if err = (&controller.RedisBackupReconciler{
+	if err = (&controller.RedisClusterBackupReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "RedisBackup")
+		setupLog.Error(err, "unable to create controller", "controller", "RedisClusterBackup")
 		os.Exit(1)
 	}
-	if os.Getenv("ENABLE_WEBHOOK") == "true" {
-		if err = (&redisv1alpha1.RedisCluster{}).SetupWebhookWithManager(mgr); err != nil {
-			setupLog.Error(err, "unable to create webhook", "webhook", "RedisCluster")
-			os.Exit(1)
-		}
+	if err = (&controller.RedisReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "Redis")
+		os.Exit(1)
+	}
+	if err = (&controller.DistributedRedisClusterReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "DistributedRedisCluster")
+		os.Exit(1)
+	}
+	if err = (&redisv1alpha1.DistributedRedisCluster{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "DistributedRedisCluster")
+		os.Exit(1)
+	}
+	if err = (&redisv1alpha1.RedisCluster{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "RedisCluster")
+		os.Exit(1)
+	}
+	if err = (&redisv1alpha1.Redis{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "Redis")
+		os.Exit(1)
 	}
 	//+kubebuilder:scaffold:builder
 

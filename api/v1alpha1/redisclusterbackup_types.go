@@ -23,17 +23,17 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// RedisBackupSpec defines the desired state of RedisBackup
-type RedisBackupSpec struct {
+// RedisClusterBackupSpec defines the desired state of RedisClusterBackup
+type RedisClusterBackupSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of RedisBackup. Edit redisbackup_types.go to remove/update
+	// Foo is an example field of RedisClusterBackup. Edit redisclusterbackup_types.go to remove/update
 	Foo string `json:"foo,omitempty"`
 }
 
-// RedisBackupStatus defines the observed state of RedisBackup
-type RedisBackupStatus struct {
+// RedisClusterBackupStatus defines the observed state of RedisClusterBackup
+type RedisClusterBackupStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -41,24 +41,24 @@ type RedisBackupStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// RedisBackup is the Schema for the redisbackups API
-type RedisBackup struct {
+// RedisClusterBackup is the Schema for the redisclusterbackups API
+type RedisClusterBackup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   RedisBackupSpec   `json:"spec,omitempty"`
-	Status RedisBackupStatus `json:"status,omitempty"`
+	Spec   RedisClusterBackupSpec   `json:"spec,omitempty"`
+	Status RedisClusterBackupStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// RedisBackupList contains a list of RedisBackup
-type RedisBackupList struct {
+// RedisClusterBackupList contains a list of RedisClusterBackup
+type RedisClusterBackupList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []RedisBackup `json:"items"`
+	Items           []RedisClusterBackup `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&RedisBackup{}, &RedisBackupList{})
+	SchemeBuilder.Register(&RedisClusterBackup{}, &RedisClusterBackupList{})
 }

@@ -23,17 +23,17 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// RedisClusterSpec defines the desired state of RedisCluster
-type RedisClusterSpec struct {
+// DistributedRedisClusterSpec defines the desired state of DistributedRedisCluster
+type DistributedRedisClusterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of RedisCluster. Edit rediscluster_types.go to remove/update
+	// Foo is an example field of DistributedRedisCluster. Edit distributedrediscluster_types.go to remove/update
 	Foo string `json:"foo,omitempty"`
 }
 
-// RedisClusterStatus defines the observed state of RedisCluster
-type RedisClusterStatus struct {
+// DistributedRedisClusterStatus defines the observed state of DistributedRedisCluster
+type DistributedRedisClusterStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -41,24 +41,24 @@ type RedisClusterStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// RedisCluster is the Schema for the redisclusters API
-type RedisCluster struct {
+// DistributedRedisCluster is the Schema for the distributedredisclusters API
+type DistributedRedisCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   RedisClusterSpec   `json:"spec,omitempty"`
-	Status RedisClusterStatus `json:"status,omitempty"`
+	Spec   DistributedRedisClusterSpec   `json:"spec,omitempty"`
+	Status DistributedRedisClusterStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// RedisClusterList contains a list of RedisCluster
-type RedisClusterList struct {
+// DistributedRedisClusterList contains a list of DistributedRedisCluster
+type DistributedRedisClusterList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []RedisCluster `json:"items"`
+	Items           []DistributedRedisCluster `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&RedisCluster{}, &RedisClusterList{})
+	SchemeBuilder.Register(&DistributedRedisCluster{}, &DistributedRedisClusterList{})
 }

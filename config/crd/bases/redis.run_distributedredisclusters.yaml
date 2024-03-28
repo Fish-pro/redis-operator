@@ -4,20 +4,21 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.0
-  name: redisbackups.redis.run
+  name: distributedredisclusters.redis.run
 spec:
   group: redis.run
   names:
-    kind: RedisBackup
-    listKind: RedisBackupList
-    plural: redisbackups
-    singular: redisbackup
+    kind: DistributedRedisCluster
+    listKind: DistributedRedisClusterList
+    plural: distributedredisclusters
+    singular: distributedrediscluster
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: RedisBackup is the Schema for the redisbackups API
+        description: DistributedRedisCluster is the Schema for the distributedredisclusters
+          API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -32,15 +33,17 @@ spec:
           metadata:
             type: object
           spec:
-            description: RedisBackupSpec defines the desired state of RedisBackup
+            description: DistributedRedisClusterSpec defines the desired state of
+              DistributedRedisCluster
             properties:
               foo:
-                description: Foo is an example field of RedisBackup. Edit redisbackup_types.go
-                  to remove/update
+                description: Foo is an example field of DistributedRedisCluster. Edit
+                  distributedrediscluster_types.go to remove/update
                 type: string
             type: object
           status:
-            description: RedisBackupStatus defines the observed state of RedisBackup
+            description: DistributedRedisClusterStatus defines the observed state
+              of DistributedRedisCluster
             type: object
         type: object
     served: true

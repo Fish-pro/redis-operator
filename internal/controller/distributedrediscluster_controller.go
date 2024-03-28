@@ -27,26 +27,26 @@ import (
 	redisv1alpha1 "github.com/Fish-pro/redis-operator/api/v1alpha1"
 )
 
-// RedisBackupReconciler reconciles a RedisBackup object
-type RedisBackupReconciler struct {
+// DistributedRedisClusterReconciler reconciles a DistributedRedisCluster object
+type DistributedRedisClusterReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=redis.run,resources=redisbackups,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=redis.run,resources=redisbackups/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=redis.run,resources=redisbackups/finalizers,verbs=update
+//+kubebuilder:rbac:groups=redis.run,resources=distributedredisclusters,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=redis.run,resources=distributedredisclusters/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=redis.run,resources=distributedredisclusters/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the RedisBackup object against the actual cluster state, and then
+// the DistributedRedisCluster object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.15.0/pkg/reconcile
-func (r *RedisBackupReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+func (r *DistributedRedisClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
 	// TODO(user): your logic here
@@ -55,8 +55,8 @@ func (r *RedisBackupReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *RedisBackupReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *DistributedRedisClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&redisv1alpha1.RedisBackup{}).
+		For(&redisv1alpha1.DistributedRedisCluster{}).
 		Complete(r)
 }
