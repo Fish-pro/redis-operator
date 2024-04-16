@@ -18,6 +18,7 @@ package main
 
 import (
 	"flag"
+	"github.com/Fish-pro/redis-operator/internal/config"
 	"os"
 
 	// Import all Kubernetes client auth plugins (e.g. Azure, GCP, OIDC, etc.)
@@ -33,6 +34,7 @@ import (
 
 	redisv1alpha1 "github.com/Fish-pro/redis-operator/api/v1alpha1"
 	"github.com/Fish-pro/redis-operator/internal/controller"
+	"github.com/Fish-pro/redis-operator/internal/k8sutil"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -63,6 +65,7 @@ func main() {
 		Development: true,
 	}
 	opts.BindFlags(flag.CommandLine)
+	config.RedisConf().AddFlags(flag.CommandLine)
 	flag.Parse()
 
 	ctrl.SetLogger(zap.New(zap.UseFlagOptions(&opts)))
@@ -113,8 +116,13 @@ func main() {
 		os.Exit(1)
 	}
 	if err = (&controller.DistributedRedisClusterReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
+		Client:      mgr.GetClient(),
+		Scheme:      mgr.GetScheme(),
+		StsControl:  k8sutil.NewStatefulSetController(mgr.GetClient()),
+		SvcControl:  k8sutil.NewServiceController(mgr.GetClient()),
+		CmControl:   k8sutil.NewConfigMapController(mgr.GetClient()),
+		PvcControl:  k8sutil.NewPvcController(mgr.GetClient()),
+		SelfControl: k8sutil.NewDistributedRedisClusterController(mgr.GetClient()),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "DistributedRedisCluster")
 		os.Exit(1)
